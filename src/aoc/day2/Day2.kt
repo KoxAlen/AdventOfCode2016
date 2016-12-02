@@ -31,7 +31,7 @@ class Keypad(private val keyLayout: Array<Array<*>>, private var position: Pair<
                         y = ny
                 }
                 'R' -> {
-                    val ny = (y+1).coerceAtMost(keyLayout[y].size-1)
+                    val ny = (y+1).coerceAtMost(keyLayout[x].size-1)
                     if (keyLayout[x][ny] != null)
                         y = ny
                 }
