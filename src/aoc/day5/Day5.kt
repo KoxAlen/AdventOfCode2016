@@ -30,13 +30,8 @@ fun main(args: Array<String>) {
     val p1 = hashSequence.filter { it.startsWith("00000") }.take(8).map { it[5] }.joinToString(separator = "")
     println("[Part 1] The code is $p1")
 
-    val p2 = kotlin.arrayOfNulls<Char>(8)
-    for (hash in hashSequence.filter { it.startsWith("00000") }.filter { it[5] >= '0' && it[5] < '8' }) {
-        val i = hash[5]-'0'
-        if (p2[i] == null)
-            p2[i] = hash[6]
-        if (p2.all { it != null })
-            break
-    }
-    println("[Part 2] The code is ${p2.joinToString(separator = "")}")
+
+    val p2 = hashSequence.filter { it.startsWith("00000") }.filter { it[5] >= '0' && it[5] < '8' }.distinctBy { it[5] }.take(8)
+            .groupBy { it[5] }.toSortedMap().map { it.value[0][6] }.joinToString(separator = "")
+    println("[Part 2] The code is $p2")
 }
