@@ -30,8 +30,11 @@ fun main(args: Array<String>) {
     val p1 = hashSequence.filter { it.startsWith("00000") }.take(8).map { it[5] }.joinToString(separator = "")
     println("[Part 1] The code is $p1")
 
-
     val p2 = hashSequence.filter { it.startsWith("00000") }.filter { it[5] >= '0' && it[5] < '8' }.distinctBy { it[5] }.take(8)
-            .groupBy { it[5] }.toSortedMap().map { it.value[0][6] }.joinToString(separator = "")
+            .fold(kotlin.arrayOfNulls<Char>(8)) {
+                acc, it ->
+                acc[it[5]-'0'] = it[6]
+                acc
+            }.joinToString(separator = "")
     println("[Part 2] The code is $p2")
 }
