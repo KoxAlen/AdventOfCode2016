@@ -34,7 +34,7 @@ class IPv7(raw: String) {
 
     private fun hasABBA(it: String): Boolean {
         return (0..it.length-4)
-                .firstOrNull { i -> it[i] != it[i+1] && it.substring(i, i+2) == it.substring(i+2, i+4).reversed() } != null
+                .firstOrNull { i -> it[i] != it[i+1] && (it[i] == it[i+3] && it[i+1] == it[i+2]) } != null
     }
 }
 
