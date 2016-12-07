@@ -48,5 +48,5 @@ fun main(args: Array<String>) {
         it.map(::IPv7).toList()
     }
     println("[Part 1] IPs with TLS support: ${ips.count(IPv7::tlsSupport)}")
-    println("[Part 1] IPs with TLS support: ${ips.count(IPv7::sslSupport)}")
+    println("[Part 1] IPs with SSL support: ${ips.count(IPv7::sslSupport)}")
 }
