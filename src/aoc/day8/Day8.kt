@@ -1,7 +1,6 @@
 package aoc.day8
 
 import java.io.File
-import java.util.*
 
 /**
  * Created by KoxAlen on 08/12/2016.
