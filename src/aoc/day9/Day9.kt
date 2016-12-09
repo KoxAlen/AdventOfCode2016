@@ -56,5 +56,5 @@ fun main(args: Array<String>) {
     require(input.isFile, { "${input.path} should be a file" })
 
     println("[Part 1] Output length: ${decompressV1(input.bufferedReader())}")
-    println("[Part 1] Output length: ${decompressV2(input.bufferedReader())}")
+    println("[Part 2] Output length: ${decompressV2(input.bufferedReader())}")
 }
