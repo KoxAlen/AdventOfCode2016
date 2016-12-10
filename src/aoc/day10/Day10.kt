@@ -37,7 +37,7 @@ class BotController {
                     }
                     when (targetUp) {
                         "bot" ->  bots[upId] = bots.getOrDefault(upId, Bot.emptyBot).give(upper)
-                        "output" -> outputs[upId] = outputs.getOrDefault(lowId, emptyList()) + upper
+                        "output" -> outputs[upId] = outputs.getOrDefault(upId, emptyList()) + upper
                     }
                 }
             }
