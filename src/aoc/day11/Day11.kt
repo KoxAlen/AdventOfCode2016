@@ -109,5 +109,5 @@ fun main(args: Array<String>) {
     val floorsP2 = initialFloors.toTypedArray()
     floorsP2[0] = Floor(floorsP2[0].things+"gelerium"+"celerium"+"gdilithium"+"cdilithium")
     val p2 = simulate(floorsP2.toList())
-    println("[Part 2] Stepes $p2")
+    println("[Part 2] Steps: $p2")
 }
