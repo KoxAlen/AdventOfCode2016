@@ -25,8 +25,8 @@ data class State(var steps: Int, var elevator: Int, var floors: List<Floor>) {
         val elements = floors.flatMap { it.things.map { it.substring(1) } }.distinct()
         val pairs = elements.map {
             element ->
-            val chipFloor = floors.mapIndexed { i, (things) -> Pair(i, things) }.filter { "c$element" in it.second }.first().first
-            val genFloor = floors.mapIndexed { i, (things) -> Pair(i, things) }.filter { "g$element" in it.second }.first().first
+            val chipFloor = floors.indexOfFirst { (things) -> things.contains("c$element") }
+            val genFloor = floors.indexOfFirst { (things) -> things.contains("g$element") }
             Pair(chipFloor, genFloor)
         }.sortedBy { it.first+it.second*10 }
         return WeakState(elevator, pairs)
