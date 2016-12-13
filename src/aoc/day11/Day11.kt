@@ -1,6 +1,6 @@
 package aoc.day11
 
-import java.io.File
+import aoc.utils.Utils
 import java.util.*
 
 /**
@@ -96,8 +96,7 @@ fun simulate(initialFloors: List<Floor>): Int {
 }
 
 fun main(args: Array<String>) {
-    require(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
+    val input = Utils.getInput(11)
     require(input.exists(), { "${input.path} does not exists" })
     require(input.isFile, { "${input.path} should be a file" })
 

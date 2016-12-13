@@ -1,6 +1,6 @@
 package aoc.day10
 
-import java.io.File
+import aoc.utils.Utils
 
 /**
  * Created by KoxAlen on 10/12/2016.
@@ -83,8 +83,7 @@ data class Bot(val lower: Int, val upper: Int) {
 
 
 fun main(args: Array<String>) {
-    require(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
+    val input = Utils.getInput(10)
     require(input.exists(), { "${input.path} does not exists" })
     require(input.isFile, { "${input.path} should be a file" })
 

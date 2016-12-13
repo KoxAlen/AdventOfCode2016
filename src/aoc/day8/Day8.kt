@@ -1,6 +1,6 @@
 package aoc.day8
 
-import java.io.File
+import aoc.utils.Utils
 
 /**
  * Created by KoxAlen on 08/12/2016.
@@ -38,8 +38,7 @@ class LittleScreen(private val width: Int, private val height: Int) {
 }
 
 fun main(args: Array<String>) {
-    require(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
+    val input = Utils.getInput(8)
     require(input.exists(), { "${input.path} does not exists" })
     require(input.isFile, { "${input.path} should be a file" })
 

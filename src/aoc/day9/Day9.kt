@@ -1,6 +1,6 @@
 package aoc.day9
 
-import java.io.File
+import aoc.utils.Utils
 import java.io.Reader
 
 /**
@@ -50,8 +50,7 @@ fun decompressV2(input: Reader): Long {
 }
 
 fun main(args: Array<String>) {
-    require(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
+    val input = Utils.getInput(9)
     require(input.exists(), { "${input.path} does not exists" })
     require(input.isFile, { "${input.path} should be a file" })
 

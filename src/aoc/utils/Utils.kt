@@ -1,5 +1,7 @@
 package aoc.utils
 
+import java.io.File
+
 /**
  * Created by KoxAlen on 05/12/2016.
  */
@@ -16,4 +18,10 @@ fun ByteArray.toHex() : String{
     }
 
     return retval.toString()
+}
+
+object Utils {
+    fun getInput(day: Int, name: String = "input"): File {
+        return File(javaClass.getResource("/aoc/day$day/$name")?.file ?: name)
+    }
 }

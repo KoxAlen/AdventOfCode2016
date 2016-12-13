@@ -1,6 +1,6 @@
 package aoc.day4
 
-import java.io.File
+import aoc.utils.Utils
 
 /**
  * Created by KoxAlen on 04/12/2016.
@@ -33,10 +33,9 @@ class Room(str: String) {
 }
 
 fun main(args: Array<String>) {
-    assert(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
-    assert(input.exists(), { "${input.path} does not exists" })
-    assert(input.isFile, { "${input.path} should be a file" })
+    val input = Utils.getInput(4)
+    require(input.exists(), { "${input.path} does not exists" })
+    require(input.isFile, { "${input.path} should be a file" })
 
     val rooms = input.useLines {
         it.map(::Room).filter(Room::isValid).toList()

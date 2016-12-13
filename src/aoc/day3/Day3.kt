@@ -1,6 +1,6 @@
 package aoc.day3
 
-import java.io.File
+import aoc.utils.Utils
 
 /**
  * Created by KoxAlen on 03/12/2016.
@@ -11,16 +11,15 @@ fun validTriangle(sides: List<Int>): Boolean {
 }
 
 fun main(args: Array<String>) {
-    assert(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
-    assert(input.exists(), { "${input.path} does not exists" })
-    assert(input.isFile, { "${input.path} should be a file" })
+    val input = Utils.getInput(3)
+    require(input.exists(), { "${input.path} does not exists" })
+    require(input.isFile, { "${input.path} should be a file" })
     val p1 = input.useLines {
         it.map { it.split(' ').filter(String::isNotBlank).map(String::toInt).sorted() }.count(::validTriangle)
     }
     println("[Part 1] There are $p1 valid triangles")
 
-    val input2 = File(args[0]).bufferedReader()
+    val input2 = input.bufferedReader()
     val p2 = takeTriangles(input2.lineSequence()).count(::validTriangle)
     input2.close()
     println("[Part 2] There are $p2 valid triangles")

@@ -1,6 +1,6 @@
 package aoc.day12
 
-import java.io.File
+import aoc.utils.Utils
 
 /**
  * Created by KoxAlen on 12/12/2016.
@@ -71,8 +71,7 @@ class AssembunnyVM(raw: List<String>) {
 }
 
 fun main(args: Array<String>) {
-    require(args.size == 1, { "Pass the input file as argument" })
-    val input = File(args[0])
+    val input = Utils.getInput(12)
     require(input.exists(), { "${input.path} does not exists" })
     require(input.isFile, { "${input.path} should be a file" })
 

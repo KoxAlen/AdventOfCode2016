@@ -1,7 +1,7 @@
 package aoc.day1
 
+import aoc.utils.Utils
 import java.io.BufferedReader
-import java.io.File
 import java.io.InputStream
 import java.lang.Math.abs
 
@@ -134,10 +134,9 @@ class MovementParser(val gridMovement: GridMovement) {
 }
 
 fun main(args: Array<String>) {
-    assert(args.size == 1, {"Pass the input file as argument"})
-    val input = File(args[0])
-    assert(input.exists(), {"${input.path} does not exists"})
-    assert(input.isFile, {"${input.path} should be a file"})
+    val input = Utils.getInput(1)
+    require(input.exists(), {"${input.path} does not exists"})
+    require(input.isFile, {"${input.path} should be a file"})
     val gridMovement = GridMovement()
     val parser = MovementParser(gridMovement)
     parser.parse(input.inputStream())
