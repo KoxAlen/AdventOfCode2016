@@ -88,7 +88,7 @@ private fun fourCharPromoter(index: Int, hash: String, candidates: Array<Mutable
     }
 }
 
-fun solve(input: String, goal: Int,
+fun solve(input: String, goal: Int, hashToExplore: Int,
           hasher: (ByteArray, Int) -> String,
           hashPromoter: (Int, String, Array<MutableList<Int>>) -> Unit,
           hashValidator: (Int, String, Array<MutableList<Int>>, MutableList<Int>) -> Unit ) {
@@ -102,13 +102,21 @@ fun solve(input: String, goal: Int,
         hashPromoter(index, hash, candidates)
     }
     found.sort()
+    val tentative = found.elementAt(goal-1)
+    val exhaust = candidates.flatMap { it }.filter { it < tentative }.max() ?: 0
+    // Make sure there are not lower index hashes yet to validate
+    while (index < exhaust+hashToExplore) {
+        val hash = hasher(seed, ++index)
+        hashValidator(index, hash, candidates, found)
+    }
+    found.sort()
     println(found.elementAt(goal-1))
 }
 
 fun main(args: Array<String>) {
     val original = "ngcjuoqr"
-    println("Part 1 original: ${Duration.ofNanos(measureNanoTime { solve(original, 64, defaultHasher(), ::defaultPromoter, ::defaultValidator) })}")
-    println("Part 2 original: ${Duration.ofNanos(measureNanoTime { solve(original, 64, stretchingHasher(2016), ::defaultPromoter, ::defaultValidator) })}")
+    println("Part 1 original: ${Duration.ofNanos(measureNanoTime { solve(original, 64, 1000, defaultHasher(), ::defaultPromoter, ::defaultValidator) })}")
+    println("Part 2 original: ${Duration.ofNanos(measureNanoTime { solve(original, 64, 1000, stretchingHasher(2016), ::defaultPromoter, ::defaultValidator) })}")
     val wideningTheRanges = "yjdafjpo"
-    println("Part 1 WideningTheRanges: ${Duration.ofNanos(measureNanoTime { solve(wideningTheRanges, 512, defaultHasher(), ::fourCharPromoter, ::sevenCharValidator) })}")
+    println("Part 1 WideningTheRanges: ${Duration.ofNanos(measureNanoTime { solve(wideningTheRanges, 512, 100000, defaultHasher(), ::fourCharPromoter, ::sevenCharValidator) })}")
 }
