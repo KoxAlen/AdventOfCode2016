@@ -12,7 +12,7 @@ abstract class HashGeneratorFactory {
     object Builder {
         fun getHashFactory(input: String, stretchTimes: Int = 0, cacheSize: Int = 1000): HashGeneratorFactory {
             return object : HashGeneratorFactory() {
-                private val cache = object : LinkedHashMap<Int, String>(cacheSize+10, 1F, true) {
+                private val cache = object : LinkedHashMap<Int, String>(cacheSize+10, 1F) {
                     override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Int, String>?): Boolean = size > cacheSize
                 }
                 val md5 = MessageDigest.getInstance("MD5")
@@ -43,7 +43,7 @@ fun main(args: Array<String>) {
         factory -> {
             (i, it) ->
             it.getOrNull((0..it.length - 3).firstOrNull { i -> it[i] == it[i + 1] && it[i] == it[i + 2] } ?: -1)?.let {
-                c -> factory.getHashGenerator(i + 1).take(1000).firstOrNull { (_, it) -> it.contains("$c$c$c$c$c") } != null
+                c -> factory.getHashGenerator(i + 1).take(1000).any { (_, it) -> it.contains("$c$c$c$c$c") }
             } ?: false
         }
     }
