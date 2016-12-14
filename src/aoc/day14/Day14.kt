@@ -39,25 +39,20 @@ fun main(args: Array<String>) {
     val input = "ngcjuoqr" //Puzzle input
     val hashPhases = 2016 //Part 2 input
 
+    val filter: (HashGeneratorFactory) -> (Pair<Int, String>) -> Boolean = {
+        factory -> {
+            (i, it) ->
+            it.getOrNull((0..it.length - 3).firstOrNull { i -> it[i] == it[i + 1] && it[i] == it[i + 2] } ?: -1)?.let {
+                c -> factory.getHashGenerator(i + 1).take(1000).firstOrNull { (_, it) -> it.contains("$c$c$c$c$c") } != null
+            } ?: false
+        }
+    }
+
     val hashFactory = HashGeneratorFactory.Builder.getHashFactory(input)
-    val p1 = hashFactory.getHashGenerator().filter {
-        (i, it) ->
-        val c = (0..it.length-3).asSequence().map { i -> it.substring(i,i+3)  }.firstOrNull { it[0] == it[1] && it[0] == it[2] }?.get(0)
-        if (c != null)
-            hashFactory.getHashGenerator(i + 1).take(1000).firstOrNull { (_, it) -> it.contains("$c$c$c$c$c") } != null
-        else
-            false
-    }.take(64).last().first
+    val p1 = hashFactory.getHashGenerator().filter(filter(hashFactory)).take(64).last().first
     println("[Part 1] Index of last hash: $p1")
 
     val hashFactory2 = HashGeneratorFactory.Builder.getHashFactory(input, hashPhases)
-    val p2 = hashFactory2.getHashGenerator().filter {
-        (i, it) ->
-        val c = (0..it.length-3).asSequence().map { i -> it.substring(i,i+3)  }.firstOrNull { it[0] == it[1] && it[0] == it[2] }?.get(0)
-        if (c != null)
-            hashFactory2.getHashGenerator(i + 1).take(1000).firstOrNull { (_, it) -> it.contains("$c$c$c$c$c") } != null
-        else
-            false
-    }.take(64).last().first
+    val p2 = hashFactory2.getHashGenerator().filter(filter(hashFactory2)).take(64).last().first
     println("[Part 2] Index of last hash: $p2")
 }
