@@ -64,5 +64,5 @@ fun main(args: Array<String>) {
     val n2 = input2.map { it.first }
     val a2 = input2.map { it.second }.mapIndexed { idx, it -> -it-(idx+1) } //Transform from our problem to the generic CRT
 
-    println("Part 1: ${Duration.ofNanos(measureNanoTime { println(crt(n2, a2)) })}")
+    println("Part 2: ${Duration.ofNanos(measureNanoTime { println(crt(n2, a2)) })}")
 }
