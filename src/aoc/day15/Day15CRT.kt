@@ -57,12 +57,21 @@ fun main(args: Array<String>) {
     val n = input.map { it.first }
     val a = input.map { it.second }.mapIndexed { idx, it -> -it-(idx+1) } //Transform from our problem to the generic CRT
 
-    println("Part 1: ${Duration.ofNanos(measureNanoTime { println(crt(n, a)) })}")
+    val t1 = Duration.ofNanos((0..99).fold(0L) {
+        acc, _ ->
+        acc + measureNanoTime { println(crt(n, a)) }
+    })
 
     val file2 = Utils.getInput(15, "UTA2")
     val input2 = file2.useLines { it.mapNotNull { reInput.find(it)?.let { val (n, a) = it.destructured; Pair(n.toLong(), a.toLong()) } }.toList() }
     val n2 = input2.map { it.first }
     val a2 = input2.map { it.second }.mapIndexed { idx, it -> -it-(idx+1) } //Transform from our problem to the generic CRT
 
-    println("Part 2: ${Duration.ofNanos(measureNanoTime { println(crt(n2, a2)) })}")
+    val t2 = Duration.ofNanos((0..99).fold(0L) {
+        acc, _ ->
+        acc + measureNanoTime { println(crt(n2, a2)) }
+    })
+
+    println("T1x100 = $t1")
+    println("T2x100 = $t2")
 }
