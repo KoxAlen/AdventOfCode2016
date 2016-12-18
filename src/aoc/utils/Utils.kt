@@ -7,7 +7,7 @@ import java.io.File
  */
 
 private val HEX_CHARS = "0123456789ABCDEF".toCharArray()
-private val LOWER_HEX_CHARS = HEX_CHARS.map(Char::toLowerCase)
+private val LOWER_HEX_CHARS = "0123456789abcdef".toCharArray()
 
 fun ByteArray.toHex(): String{
     val retval = StringBuilder(size*2)
