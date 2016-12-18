@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
     val p2 = 400000 //Input p2
 
     populateRows(rows, p2)
-    println("[Part 1] Safe tiles: ${rows.sumBy { it.count { it == '.' } }}")
+    println("[Part 2] Safe tiles: ${rows.sumBy { it.count { it == '.' } }}")
 }
 
 fun populateRows(rows: MutableList<CharArray>, deep: Int) {
