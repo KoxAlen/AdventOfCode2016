@@ -26,6 +26,6 @@ fun main(args: Array<String>) {
     }
     openIPs.add(low.rangeTo(4294967295))
 
-    println("[Part 1] Lowest open ip: ${openIPs.minBy { it.start }?.start}")
+    println("[Part 1] Lowest open ip: ${openIPs.first().start}")
     println("[Part 2] Open ips: ${openIPs.sumBy { it.count() }}")
 }
