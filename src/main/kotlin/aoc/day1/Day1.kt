@@ -95,7 +95,7 @@ class GridMovement {
     }
 
     fun totalDistance(): Int {
-        return accumulator[0] + accumulator[1]
+        return abs(accumulator[0]) + abs(accumulator[1])
     }
 
     fun distanceToHQ(): Int {
