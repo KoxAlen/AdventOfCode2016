@@ -30,49 +30,28 @@ class AssembunnyVM(raw: List<String>) {
 
     private abstract class Op {
         abstract operator fun invoke(vararg args: Value)
-        abstract fun validate(vararg args: Value): Boolean
     }
     private inner class Copy : Op() {
-        override fun validate(vararg args: Value): Boolean {
-            return args[1] is Register
-        }
-
         override fun invoke(vararg args: Value) {
             registers[args[1].register] = args[0].value
         }
     }
     private inner class Inc : Op() {
-        override fun validate(vararg args: Value): Boolean {
-            return args[0] is Register
-        }
-
         override fun invoke(vararg args: Value) {
             registers[args[0].register]++
         }
     }
     private inner class Dec : Op() {
-        override fun validate(vararg args: Value): Boolean {
-            return args[0] is Register
-        }
-
         override fun invoke(vararg args: Value) {
             registers[args[0].register]--
         }
     }
     private inner class JumpNotZero : Op() {
-        override fun validate(vararg args: Value): Boolean {
-            return true
-        }
-
         override fun invoke(vararg args: Value) {
             if (args[0].value != 0) pc += args[1].value-1
         }
     }
     private inner class Toggle : Op() {
-        override fun validate(vararg args: Value): Boolean {
-            return true
-        }
-
         override fun invoke(vararg args: Value) {
             val address = pc+args[0].value
             code.getOrNull(address)?.let {
